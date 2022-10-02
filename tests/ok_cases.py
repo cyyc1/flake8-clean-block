@@ -117,6 +117,16 @@ return 2
 """
 
 
+case_5c = """
+if a == 'a':
+    depth += 1
+elif b == 'b:
+    depth -= 1
+
+j += 1
+"""
+
+
 case_6 = """
 while True:
     print(1)
@@ -309,6 +319,7 @@ def collect_all_cases():
         case_4,
         case_5a,
         case_5b,
+        case_5c,
         case_6,
         case_7a,
         case_7b,

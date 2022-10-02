@@ -110,6 +110,16 @@ return 2
 case_5b = [case_5b_src, [12, 15]]
 
 
+case_5c_src = """
+if a == 'a':
+    depth += 1
+elif b == 'b:
+    depth -= 1
+j += 1
+"""
+case_5c = [case_5c_src, [6, 1]]
+
+
 case_6a_src = """
 while True:
     print(1)
@@ -263,6 +273,7 @@ def collect_all_cases():
         case_4,
         case_5a,
         case_5b,
+        case_5c,
         case_6a,
         case_6b,
         case_7a,
