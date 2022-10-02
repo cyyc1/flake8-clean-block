@@ -23,7 +23,7 @@ class Visitor(ast.NodeVisitor):
     def generic_visit(self, node: ast.Module) -> None:
         self._check_one_node(node)
 
-    def _check_one_node(self, node):
+    def _check_one_node(self, node) -> None:
         if 'body' in node.__dict__:
             self._check_a_list_of_items(node.body)
 
@@ -36,7 +36,7 @@ class Visitor(ast.NodeVisitor):
         if 'finalbody' in node.__dict__:
             self._check_a_list_of_items(node.finalbody)
 
-    def _check_a_list_of_items(self, item_list):
+    def _check_a_list_of_items(self, item_list: list) -> None:
         for i, this_item in enumerate(item_list):
             if isinstance(this_item, BLOCKS_REQUIRING_INDENT):
                 self._check_one_node(this_item)
