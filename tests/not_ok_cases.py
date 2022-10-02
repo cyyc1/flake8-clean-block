@@ -117,7 +117,7 @@ elif b == 'b':
     depth -= 1
 j += 1
 """
-case_5c = [case_5c_src, [6, 1]]
+case_5c = [case_5c_src, [5]]
 
 
 case_6a_src = """
