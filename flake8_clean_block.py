@@ -1,11 +1,7 @@
 import ast
-import sys
 from typing import Generator, Tuple, Type, Any, List
 
-if sys.version_info < (3, 8):
-    import importlib_metadata
-else:
-    import importlib.metadata as importlib_metadata
+import importlib.metadata as importlib_metadata
 
 MSG = 'CLB100 no blank line after the end of an indented block'
 BLOCKS_REQUIRING_INDENT = (
