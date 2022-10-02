@@ -34,6 +34,29 @@ print(a)
 """
 
 
+case_1h = """
+for i in range(5):
+    for j in range(5):
+        for k in range(5):
+            for l in range(5):
+                for m in range(5):
+                    for n in range(5):
+                        for o in range(5):
+                            for p in range(5):
+                                for q in range(5):
+                                    for r in range(5):
+                                        for s in range(5):
+                                            for t in range(5):
+                                                for u in range(5):
+                                                    for v in range(5):
+                                                        for w in range(5):
+                                                            for x in range(5):
+                                                                print(1)
+
+print(2)
+"""
+
+
 case_2a = """
 if a == 1:
     print(a)
@@ -312,6 +335,7 @@ def collect_all_cases():
         case_1e,
         case_1f,
         case_1g,
+        case_1h,
         case_2a,
         case_2b,
         case_3a,

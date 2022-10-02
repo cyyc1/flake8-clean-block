@@ -60,10 +60,9 @@ class Visitor(ast.NodeVisitor):
                     ):
                         line = this_item.end_lineno
 
-                        # Column offset is relative (we need to accumulate it
-                        # from the root of the tree), and it doesn't really
-                        # provide a lot of valuable information for this
-                        # particular style violation, so we use 0 here for now.
+                        # Column offset doesn't really provide a lot of
+                        # valuable information for this particular style
+                        # violation, so we use 0 here for now.
                         col = 0
                         self.problems.append((line, col))
 
