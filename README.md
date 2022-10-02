@@ -21,7 +21,7 @@ There is one violation code that this plugin reports:
 
 ### _Wrong_
 
-This plugin considers the following styles as wrong:
+This plugin considers the following styles wrong:
 
 ```python
 for i in range(5):
