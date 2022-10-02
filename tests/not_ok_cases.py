@@ -113,7 +113,7 @@ case_5b = [case_5b_src, [12, 15]]
 case_5c_src = """
 if a == 'a':
     depth += 1
-elif b == 'b:
+elif b == 'b':
     depth -= 1
 j += 1
 """

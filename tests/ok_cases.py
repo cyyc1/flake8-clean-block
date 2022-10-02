@@ -120,7 +120,7 @@ return 2
 case_5c = """
 if a == 'a':
     depth += 1
-elif b == 'b:
+elif b == 'b':
     depth -= 1
 
 j += 1
