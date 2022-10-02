@@ -17,7 +17,7 @@ case_1b = case_1.replace(  # OK to have comments on blank lines
 )
 
 
-case_1c = case_1.replace('\n\n', '\n    \n')  # OK to have spaces on blank lines
+case_1c = case_1.replace('\n\n', '\n  \n')  # OK to have spaces on blank lines
 
 
 case_1d = """for i in range(5):
@@ -60,9 +60,9 @@ case_3 = """a = 2
 for i in range(5):
     for j in range(3):
         a += j
-    
+
     a += i
-    
+
 print(a)
 """
 
@@ -91,7 +91,7 @@ elif y == 2:
     print(y)
 else:
     raise ValueError
-    
+
 return 2
 """
 
@@ -120,7 +120,7 @@ return 2
 case_6 = """
 while True:
     print(1)
-    
+
 print(2)
 """
 
@@ -221,7 +221,7 @@ with open('filename.txt', 'r') as fp:
     data = pickle.load(fp)
     for ii in range(10):
         print(ii)
-        
+
     xyz = 1
 
 print(data)

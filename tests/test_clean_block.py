@@ -11,8 +11,8 @@ from flake8_clean_block import Plugin
 THIS_DIR = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(THIS_DIR)
 
-import ok_cases
-import not_ok_cases
+import ok_cases  # noqa: E402
+import not_ok_cases  # noqa: E402
 
 
 def _results(src_code: str) -> Set[str]:
