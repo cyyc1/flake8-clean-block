@@ -1,40 +1,40 @@
 case_0 = ''  # trivial case: no code at all
 
 
-case_1 = """a = 2
+case_1a = """a = 2
 for i in range(5):
     a += 1
 
 print(a)
 """
 
-case_1a = case_1.replace('\n\n', '\n\n\n\n\n')  # OK to have more blank lines
+case_1b = case_1a.replace('\n\n', '\n\n\n\n\n')  # OK to have more blank lines
 
 
-case_1b = case_1.replace(  # OK to have comments on blank lines
+case_1c = case_1a.replace(  # OK to have comments on blank lines
     '\n\n',
     '\n# END OF "IF" BLOCK\n',
 )
 
 
-case_1c = case_1.replace('\n\n', '\n  \n')  # OK to have spaces on blank lines
+case_1d = case_1a.replace('\n\n', '\n  \n')  # OK to have spaces on blank lines
 
 
-case_1d = """for i in range(5):
+case_1e = """for i in range(5):
     a += 2"""  # no newline at the end
 
 
-case_1e = "for i in range(5): a += 2"
+case_1f = "for i in range(5): a += 2"
 
 
-case_1f = """
+case_1g = """
 for i in range(5): a += 2
 
 print(a)
 """
 
 
-case_2 = """
+case_2a = """
 if a == 1:
     print(a)
 elif a == 2:
@@ -53,10 +53,10 @@ while True:
 """
 
 
-case_2a = case_2.replace('\n\n', '\n# SOME COMMENT\n')
+case_2b = case_2a.replace('\n\n', '\n# SOME COMMENT\n')
 
 
-case_3 = """a = 2
+case_3a = """a = 2
 for i in range(5):
     for j in range(3):
         a += j
@@ -67,7 +67,7 @@ print(a)
 """
 
 
-case_3a = case_3.replace(  # OK to have comments on blank lines
+case_3b = case_3a.replace(  # OK to have comments on blank lines
     '\n\n',
     '\n# END OF INDENTED BLOCK\n',
 )
@@ -84,7 +84,7 @@ print('good')
 """
 
 
-case_5 = """
+case_5a = """
 if x < 5:
     print(x)
 elif y == 2:
@@ -96,7 +96,7 @@ return 2
 """
 
 
-case_5a = """
+case_5b = """
 if x < 5:
     print(x)
     while z > 0:
@@ -125,7 +125,7 @@ print(2)
 """
 
 
-case_7 = """
+case_7a = """
 try:
     f = open('myfile.txt')
 except OSError as err:
@@ -138,7 +138,7 @@ except BaseException as err:
 """
 
 
-case_7a = """
+case_7b = """
 try:
     f = open('myfile.txt')
     s = f.readline()
@@ -161,7 +161,7 @@ except BaseException as err:
 """
 
 
-case_7b = """
+case_7c = """
 try:
     a = 1
 except TypeError as err:
@@ -198,19 +198,9 @@ finally:
     print('Hello world!')"""
 
 
-case_10 = """import pickle
-with open('filename.txt', 'r') as fp:
-    data = pickle.load(fp)
-
-print(data)
-"""
-
-
 case_10a = """import pickle
 with open('filename.txt', 'r') as fp:
     data = pickle.load(fp)
-    for ii in range(10):
-        print(ii)
 
 print(data)
 """
@@ -222,24 +212,80 @@ with open('filename.txt', 'r') as fp:
     for ii in range(10):
         print(ii)
 
+print(data)
+"""
+
+
+case_10c = """import pickle
+with open('filename.txt', 'r') as fp:
+    data = pickle.load(fp)
+    for ii in range(10):
+        print(ii)
+
     xyz = 1
 
 print(data)
 """
 
 
-# Case 11 is OK, because it's out of the scope of this plugin.
+case_11a = """
+def some_func(arg1: list, arg2: list) -> int:
+    for i in range(len(arg1)):
+        for j in range(len(arg2)):
+            print(i)
+
+        print(j)
+
+    return 5
+
+if True:
+    some_func([1, 2, 3], [2, 3])
+
+print('Good morning')
+"""
+
+
+case_11b = """
+class MyClass:
+    def __init__(self, arg1):
+        if arg1 == 2:
+            self.my_attr = 1
+
+        self.my_attr = 2
+
+    @classmethod
+    def do_something(cls, arg1):
+        for i in range(20):
+            print(i)
+
+        print(arg1)
+
+    def do_something_else(self, arg1, arg2):
+        if 5 in arg1:
+            print(arg1)
+
+        for j in arg2:
+            foo = 3 + 4
+
+        return 5
+
+
+"""
+
+
+# This is OK, because it's out of the scope of this plugin.
 # It can be caught by E3 in pycodestyle:
 # https://pycodestyle.pycqa.org/en/latest/intro.html#error-codes
-case_11 = """
+case_99a = """
 def some_func(arg1, arg2):
     print(2)
 a = 2
 """
 
 
-# Similar to Case 11, this is also OK.
-case_11a = """
+# Similar to Case 99a, this is also OK, because it's out of the scope of this
+# plugin.
+case_99b = """
 def some_func(arg1, arg2):
     return arg1 + arg2
 a = 3
@@ -249,29 +295,31 @@ a = 3
 def collect_all_cases():
     return (
         case_0,
-        case_1,
-        case_2,
-        case_2a,
-        case_1d,
-        case_1e,
-        case_1f,
         case_1a,
         case_1b,
         case_1c,
-        case_3,
+        case_1d,
+        case_1e,
+        case_1f,
+        case_1g,
+        case_2a,
+        case_2b,
         case_3a,
+        case_3b,
         case_4,
-        case_5,
         case_5a,
+        case_5b,
         case_6,
-        case_7,
         case_7a,
         case_7b,
+        case_7c,
         case_8,
         case_9,
-        case_10,
         case_10a,
         case_10b,
-        case_11,
+        case_10c,
         case_11a,
+        case_11b,
+        case_99a,
+        case_99b,
     )

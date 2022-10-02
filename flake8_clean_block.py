@@ -1,5 +1,5 @@
 import ast
-from typing import Generator, Tuple, Type, Any, List
+from typing import Generator, Tuple, Type, Any, List, Union
 
 import importlib.metadata as importlib_metadata
 
@@ -15,12 +15,16 @@ BLOCKS_REQUIRING_INDENT = (
     ast.ExceptHandler,
 )
 
+ModuleLikeTypes = Union[
+    ast.Mod, ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef,
+]
+
 
 class Visitor(ast.NodeVisitor):
     def __init__(self) -> None:
         self.problems: List[Tuple[int, int]] = []
 
-    def generic_visit(self, node: ast.Module) -> None:
+    def generic_visit(self, node: ModuleLikeTypes) -> None:
         self._check_one_node(node)
 
     def _check_one_node(self, node) -> None:
@@ -38,6 +42,12 @@ class Visitor(ast.NodeVisitor):
 
     def _check_a_list_of_items(self, item_list: list) -> None:
         for i, this_item in enumerate(item_list):
+            if isinstance(
+                    this_item,
+                    (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef),
+            ):
+                self.generic_visit(this_item)  # as if it were an ast.Module
+
             if isinstance(this_item, BLOCKS_REQUIRING_INDENT):
                 self._check_one_node(this_item)
                 if i < len(item_list) - 1:  # not the last item

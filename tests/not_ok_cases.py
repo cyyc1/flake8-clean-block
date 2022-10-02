@@ -1,12 +1,12 @@
-case_1_src = """a = 2
+case_1a_src = """a = 2
 for i in range(5):
     a += 1
 print(a)
 """
-case_1 = (case_1_src, [3])  # "3" means the violation happens on Line 3
+case_1a = (case_1a_src, [3])  # "3" means the violation happens on Line 3
 
 
-case_1a_src = """
+case_1b_src = """
 a = 2
 for i in range(5):
     a += 1
@@ -16,17 +16,17 @@ for i in range(5):
 print(a)
 print(b)
 """
-case_1a = (case_1a_src, [6, 7])  # the violation happens on Lines 6 & 7
+case_1b = (case_1b_src, [6, 7])  # the violation happens on Lines 6 & 7
 
 
-case_1b_src = """
+case_1c_src = """
 for i in range(5): a += 2
 print(a)
 """
-case_1b = (case_1b_src, [2])
+case_1c = (case_1c_src, [2])
 
 
-case_2_src = """
+case_2a_src = """
 if a == 1:
     print(a)
 if b == 2:
@@ -36,10 +36,10 @@ for i in (1, 3, 5, 10):
 while True:
     print('a')
 """
-case_2 = [case_2_src, [3, 5, 7]]
+case_2a = [case_2a_src, [3, 5, 7]]
 
 
-case_2a_src = """
+case_2b_src = """
 if a == 1:
     print(a)
 elif a == 2:
@@ -53,7 +53,7 @@ for i in range(2):
 while True:
     print('a')
 """
-case_2a = [case_2a_src, [7, 9, 11]]
+case_2b = [case_2b_src, [7, 9, 11]]
 
 
 case_3_src = """a = 2
@@ -78,7 +78,7 @@ print('good')
 case_4 = (case_4_src, [4])
 
 
-case_5_src = """
+case_5a_src = """
 if x < 5:
     print(x)
 elif y == 2:
@@ -87,10 +87,10 @@ else:
     raise ValueError
 return 2
 """
-case_5 = (case_5_src, [7])
+case_5a = (case_5a_src, [7])
 
 
-case_5a_src = """
+case_5b_src = """
 if x < 5:
     print(x)
     while z > 0:
@@ -107,24 +107,24 @@ else:
     raise ValueError  # <-- violation here
 return 2
 """
-case_5a = [case_5a_src, [12, 15]]
+case_5b = [case_5b_src, [12, 15]]
 
 
-case_6_src = """
+case_6a_src = """
 while True:
     print(1)
 print(2)
 """
-case_6 = [case_6_src, [3]]
+case_6a = [case_6a_src, [3]]
 
 
-case_6a_src = """
+case_6b_src = """
 while True: print(1)
 print(2)"""
-case_6a = [case_6a_src, [2]]
+case_6b = [case_6b_src, [2]]
 
 
-case_7_src = """
+case_7a_src = """
 try:
     f = open('myfile.txt')
 except OSError as err:
@@ -135,10 +135,10 @@ except OSError as err:
 except ValueError:
     print("asdf")
 """
-case_7 = [case_7_src, [7]]
+case_7a = [case_7a_src, [7]]
 
 
-case_7a_src = """
+case_7b_src = """
 try:
     f = open('myfile.txt')
 except OSError as err:
@@ -155,7 +155,7 @@ finally:
         print(b)
     print('a')
 """
-case_7a = [case_7a_src, [7, 11, 15]]
+case_7b = [case_7b_src, [7, 11, 15]]
 
 
 case_8_src = """
@@ -183,22 +183,12 @@ finally:
 case_9 = [case_9_src, [6]]
 
 
-case_10_src = """import pickle
-with open('filename.txt', 'r') as fp:
-    data = pickle.load(fp)
-print(data)
-"""
-case_10 = [case_10_src, [3]]
-
-
 case_10a_src = """import pickle
 with open('filename.txt', 'r') as fp:
     data = pickle.load(fp)
-    for ii in range(10):
-        print(ii)
 print(data)
 """
-case_10a = [case_10a_src, [5]]
+case_10a = [case_10a_src, [3]]
 
 
 case_10b_src = """import pickle
@@ -206,30 +196,82 @@ with open('filename.txt', 'r') as fp:
     data = pickle.load(fp)
     for ii in range(10):
         print(ii)
+print(data)
+"""
+case_10b = [case_10b_src, [5]]
+
+
+case_10c_src = """import pickle
+with open('filename.txt', 'r') as fp:
+    data = pickle.load(fp)
+    for ii in range(10):
+        print(ii)
     xyz = 1
 print(data)
 """
-case_10b = [case_10b_src, [5, 6]]
+case_10c = [case_10c_src, [5, 6]]
+
+
+case_11a_src = """
+def some_func(arg1: list, arg2: list) -> int:
+    for i in range(len(arg1)):
+        for j in range(len(arg2)):
+            print(i)
+        print(j)
+    return 5
+
+if True:
+    some_func([1, 2, 3], [2, 3])
+print('Good morning')
+"""
+case_11a = [case_11a_src, [5, 6, 10]]
+
+
+case_11b_src = """
+class MyClass:
+    def __init__(self, arg1):
+        if arg1 == 2:
+            self.my_attr = 1
+        self.my_attr = 2
+
+    @classmethod
+    def do_something(cls, arg1):
+        for i in range(20):
+            print(i)
+        print(arg1)
+
+    def do_something_else(self, arg1, arg2):
+        if 5 in arg1:
+            print(arg1)
+        for j in arg2:
+            foo = 3 + 4
+        return 5
+
+
+"""
+case_11b = [case_11b_src, [5, 11, 16, 18]]
 
 
 def collect_all_cases():
     return (
-        case_1,
         case_1a,
         case_1b,
-        case_2,
+        case_1c,
         case_2a,
+        case_2b,
         case_3,
         case_4,
-        case_5,
         case_5a,
-        case_6,
+        case_5b,
         case_6a,
-        case_7,
+        case_6b,
         case_7a,
+        case_7b,
         case_8,
         case_9,
-        case_10,
         case_10a,
         case_10b,
+        case_10c,
+        case_11a,
+        case_11b,
     )
