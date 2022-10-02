@@ -24,7 +24,7 @@ case_1e = """for i in range(5):
     a += 2"""  # no newline at the end
 
 
-case_1f = "for i in range(5): a += 2"
+case_1f = 'for i in range(5): a += 2'
 
 
 case_1g = """

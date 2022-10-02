@@ -93,4 +93,3 @@ print(content)
 When two lines belonging to different indentation level are right next to each other, it's difficult to read.  Additionally, accidentally hitting the "tab" key on the outer line leads to subtle and hard-to-find bugs (and vice versa).
 
 Therefore, it's better that we add at least one blank line between lines of different indentation levels.
-
