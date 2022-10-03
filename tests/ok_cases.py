@@ -57,6 +57,15 @@ print(2)
 """
 
 
+case_1i = """
+def some_func(arg1):
+    if arg1:
+        return 2
+
+    return 1
+"""
+
+
 case_2a = """
 if a == 1:
     print(a)
@@ -348,6 +357,7 @@ def collect_all_cases():
         case_1f,
         case_1g,
         case_1h,
+        case_1i,
         case_2a,
         case_2b,
         case_3a,

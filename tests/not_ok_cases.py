@@ -48,6 +48,16 @@ print(2)
 """
 case_1d = (case_1d_src, [18])
 
+
+case_1e_src = """
+def some_func(arg1):
+    if arg1:
+        return 2
+    return 1
+"""
+case_1e = [case_1e_src, [4]]
+
+
 case_2a_src = """
 if a == 1:
     print(a)
@@ -290,6 +300,7 @@ def collect_all_cases():
         case_1b,
         case_1c,
         case_1d,
+        case_1e,
         case_2a,
         case_2b,
         case_3,
