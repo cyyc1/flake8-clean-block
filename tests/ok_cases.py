@@ -150,6 +150,18 @@ j += 1
 """
 
 
+case_5d = """
+if something:
+    a = b + 3
+    for i in this_list:
+        some_func(2)
+        for j in that_list:
+            some_func(3)
+else:
+    raise ValueError
+"""
+
+
 case_6 = """
 while True:
     print(1)
@@ -344,6 +356,7 @@ def collect_all_cases():
         case_5a,
         case_5b,
         case_5c,
+        case_5d,
         case_6,
         case_7a,
         case_7b,
