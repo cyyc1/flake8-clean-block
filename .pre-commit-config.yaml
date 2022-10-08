@@ -26,7 +26,9 @@ repos:
     rev: v1.7.0
     hooks:
     -   id: autopep8
+        args: [--in-place, --max-line-length=88]
 -   repo: https://github.com/PyCQA/flake8
     rev: 5.0.4
     hooks:
     -   id: flake8
+        args: [--config=.flake8]
